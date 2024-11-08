@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css"> <!-- Link to CSS file -->
+</head>
+<body>
+  <h2>Admin Dashboard</h2>
+  
+  <!-- Form to Add New Article -->
+  <form action="/admin/add-article" method="POST">
+    <input type="text" name="title" placeholder="Article Title" required>
+    <textarea name="content" placeholder="Article Content" required></textarea>
+    <button type="submit">Add Article</button>
+  </form>
+
+  <h3>Existing Articles</h3>
+  <div id="articles">
+    {{#each articles}}
+    <div>
+      <h4>{{this.title}}</h4>
+      <p>{{this.content}}</p>
+      
+      <!-- Edit Form -->
+      <form action="/admin/edit-article/{{this._id}}" method="POST">
+        <input type="text" name="title" value="{{this.title}}" required>
+        <textarea name="content">{{this.content}}</textarea>
+        <button type="submit">Edit</button>
+      </form>
+
+      <!-- Delete Button -->
+      <form action="/admin/delete-article/{{this._id}}" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+    {{/each}}
+  </div>
+</body>
+</html>
